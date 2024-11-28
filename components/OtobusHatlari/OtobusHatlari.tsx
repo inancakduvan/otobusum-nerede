@@ -23,7 +23,7 @@ const OtobusHatlari = () => {
             <div className={styles.header}>HAT SEÇİNİZ</div>
             <div className={styles.list}>
                 {
-                    data.map((item: any) => <div key={"otobus-hatlari-" + item.HAT_NO} className={styles.listItem} onClick={() => router.push("/hat/" + item.HAT_NO)}> 
+                    data.map((item) => <div key={"otobus-hatlari-" + item.HAT_NO} className={styles.listItem} onClick={() => router.push("/hat/" + item.HAT_NO)}> 
                         <div className={styles.busNo}>{item.HAT_NO}</div> <div className={styles.busName}>({item.HAT_ADI})</div>
                     </div>)
                 }
