@@ -9,16 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "jsdom": "^25.0.1",
+    "next": "15.0.3",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "next": "15.0.3"
+    "sass": "^1.81.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "eslint-config-next": "15.0.3",
+    "typescript": "^5"
   }
 }

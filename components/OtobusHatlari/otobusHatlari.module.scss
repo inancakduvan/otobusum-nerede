@@ -1,0 +1,53 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .listItem {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        font-size: 16px;
+        gap: 16px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        font-weight: 500;
+
+        .busNo {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .busName {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-weight: 600;
+}
