@@ -11,6 +11,7 @@ const YaklasanOtobusler = () => {
     const busNo = router.query.busNo ? router.query.busNo.toString() : "";
     const direction = router.query.direction ? router.query.direction.toString() : "";
 
+    // @typescript-eslint/no-explicit-any
     const [busComings, setBusComings] = useState<Array<any>>([]);
 
         const fetchData = async (fetches: Array<any>) => {

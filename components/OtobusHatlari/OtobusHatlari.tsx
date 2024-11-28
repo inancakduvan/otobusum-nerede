@@ -5,7 +5,7 @@ import styles from "./otobusHatlari.module.scss";
 import data from "../../data/eshot-otobus-hatlari.json";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 const OtobusHatlari = () => {
     const router = useRouter();

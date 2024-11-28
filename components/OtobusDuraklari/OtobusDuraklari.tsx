@@ -10,9 +10,9 @@ const OtobusDuraklari = () => {
     const router = useRouter();
     const busNo = router.query.busNo ? router.query.busNo.toString() : "";
 
-    const [stations1, setStations1] = useState<any>([]);
-    const [stations2, setStations2] = useState<any>([]);
-    const [currentStations, setCurrentStations] = useState<any>([]);
+    const [stations1, setStations1] = useState<Array<any>>([]);
+    const [stations2, setStations2] = useState<Array<any>>([]);
+    const [currentStations, setCurrentStations] = useState<Array<any>>([]);
     const [showStations1, setShowStations1] = useState<boolean>(true);
     const [searchedValue, setSearchedValue] = useState("");
 

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import OtobusHatlari from "@/components/OtobusHatlari/OtobusHatlari";
 import { useEffect, useLayoutEffect } from "react";
 import { useRouter } from "next/router";
 
