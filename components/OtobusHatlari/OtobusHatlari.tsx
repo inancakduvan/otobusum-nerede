@@ -6,6 +6,7 @@ import data from "../../data/eshot-otobus-hatlari.json";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { useMemo, useRef, useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 const OtobusHatlari = () => {
     const router = useRouter();
@@ -35,7 +36,8 @@ const OtobusHatlari = () => {
             <div className={styles.header}>HAT SEÇİNİZ</div>
 
             <div className={styles.search}>
-                <input ref={inputRef} type="text" placeholder="Durak adı giriniz..." onInput={() => setSearchedValue(inputRef.current!.value)} />
+                <div className={styles.searchIcon}><FaSearch size={16} /></div>
+                <input ref={inputRef} type="text" placeholder="Otobüs numarasını veya hat adını giriniz..." onInput={() => setSearchedValue(inputRef.current!.value)} />
             </div>
             
             <div className={styles.list}>

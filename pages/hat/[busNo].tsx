@@ -1,4 +1,5 @@
 import OtobusDuraklari from "@/components/OtobusDuraklari/OtobusDuraklari";
+import Head from "next/head";
 import { useLayoutEffect } from "react";
 
 export default function Hat() {
@@ -12,6 +13,14 @@ export default function Hat() {
     }, [])
 
     return (
+        <>
+        <Head>
+            <title>Otobüsüm Nerede</title>
+            <meta name="description" content="Otobüsüm Nerede" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+        </Head>
         <OtobusDuraklari />
+        </>
     );
 }

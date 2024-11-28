@@ -1,15 +1,18 @@
 import { useRouter } from "next/router";
 import data from "../../data/eshot-otobus-duraklari.json";
+import dataHatlar from "../../data/eshot-otobus-hatlari.json";
 
 import styles from "./yaklasanOtobusler.module.scss";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaBiking, FaWheelchair } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBiking, FaWheelchair } from "react-icons/fa";
 
 const YaklasanOtobusler = () => {
     const router = useRouter();
     const stationName = router.query.stationName ? router.query.stationName.toString() : "";
     const busNo = router.query.busNo ? router.query.busNo.toString() : "";
     const direction = router.query.direction ? router.query.direction.toString() : "";
+    const [busDirectionStart, setBusDirectionStart] = useState("");
+    const [busDirectionEnd, setBusDirectionEnd] = useState("");
 
     // @typescript-eslint/no-explicit-any
     const [busComings, setBusComings] = useState<Array<any>>([]);
@@ -66,11 +69,35 @@ const YaklasanOtobusler = () => {
 
         fetchData(jsons);
     }, [data, stationName])
+    
+    useEffect(() => {
+        if (busNo) {
+
+            const bus = dataHatlar.find((item) => item.HAT_NO.toString() === busNo);
+            
+            if (bus) {
+                setBusDirectionStart(bus.HAT_BASLANGIC);
+                setBusDirectionEnd(bus.HAT_BITIS);
+            }
+        }
+    }, [busNo])
+
     return (
         <>
+            <div className="breadcrumbs">
+                <div className="breadcrumbs-item" onClick={() => router.push("/duraklar")}>{busNo} Numaralı Otobüs</div>
+                <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
+                <div className="breadcrumbs-item" onClick={() => router.push("/hat/" + busNo)}>Durak Seçiniz</div>
+                <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
+                <div className="breadcrumbs-item">Yaklaşan Otobüsler</div>
+            </div>
+
             <div className={styles.header}>
                 <span className={styles.backButton} onClick={() => router.push("/hat/" + busNo)}><FaArrowLeft /></span>
-                {stationName} Durağı
+                <span className={styles.stationName}>{stationName} Durağı</span>
+                { (busDirectionStart && busDirectionEnd) && <div className={styles.busDirection}>
+                    {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
+                </div>}
             </div>
 
             <div className={styles.busComings}>
@@ -90,7 +117,7 @@ const YaklasanOtobusler = () => {
                         </div>
                     </div>)
                     :
-                    "Yaklaşan otobüs bulunmamaktadır"
+                    <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır</div>
                 }
             </div>
         </>

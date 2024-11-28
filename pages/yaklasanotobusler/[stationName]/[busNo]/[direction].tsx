@@ -1,4 +1,5 @@
 import YaklasanOtobusler from "@/components/YaklasanOtobusler/YaklasanOtobusler";
+import Head from "next/head";
 import { useLayoutEffect } from "react";
 
 export default function Yaklasanlar() {
@@ -12,6 +13,14 @@ export default function Yaklasanlar() {
     }, [])
 
     return (
-        <YaklasanOtobusler />
+        <>
+            <Head>
+            <title>Otobüsüm Nerede</title>
+            <meta name="description" content="Otobüsüm Nerede" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <YaklasanOtobusler />
+        </>
     );
 }

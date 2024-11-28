@@ -56,3 +56,31 @@ input {
   height: 40px;
   border-radius: 4px;
 }
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  padding: 8px 16px;
+  background: #f3f3f3;
+  border-bottom: 1px solid #ebe4e4;
+}
+
+.breadcrumbs-icon,
+.breadcrumbs-item {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs-item {
+  color: #4b78b4;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.breadcrumbs-icon {
+  color: #ddd;
+}

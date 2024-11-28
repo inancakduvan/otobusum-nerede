@@ -3,8 +3,9 @@
 import { useRouter } from "next/router";
 import styles from "./otobusDuraklari.module.scss";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
+import data from "../../data/eshot-otobus-hatlari.json";
 
 const OtobusDuraklari = () => {
     const router = useRouter();
@@ -15,6 +16,8 @@ const OtobusDuraklari = () => {
     const [currentStations, setCurrentStations] = useState<Array<any>>([]);
     const [showStations1, setShowStations1] = useState<boolean>(true);
     const [searchedValue, setSearchedValue] = useState("");
+    const [busDirectionStart, setBusDirectionStart] = useState("");
+    const [busDirectionEnd, setBusDirectionEnd] = useState("");
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -62,6 +65,13 @@ const OtobusDuraklari = () => {
         if (busNo) {
             getStations1();
             getStations2();
+
+            const bus = data.find((item) => item.HAT_NO.toString() === busNo);
+            
+            if (bus) {
+                setBusDirectionStart(bus.HAT_BASLANGIC);
+                setBusDirectionEnd(bus.HAT_BITIS);
+            }
         }
     }, [busNo])
 
@@ -87,9 +97,18 @@ const OtobusDuraklari = () => {
 
     return (<>
         <div className={styles.wrapper}>
+            <div className="breadcrumbs">
+                <div className="breadcrumbs-item" onClick={() => router.push("/duraklar")}>{busNo} Numaralı Otobüs</div>
+                <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
+                <div className="breadcrumbs-item">Durak Seçiniz</div>
+            </div>
+
             <div className={styles.header}>
                 <span className={styles.backButton} onClick={() => router.push("/duraklar")}><FaArrowLeft /></span>
                 DURAK SEÇİNİZ
+                { (busDirectionStart && busDirectionEnd) && <div className={styles.busDirection}>
+                    {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
+                </div>}
             </div>
 
             <div className={styles.selectDirection}>
@@ -98,6 +117,7 @@ const OtobusDuraklari = () => {
             </div>
 
             <div className={styles.search}>
+                <div className={styles.searchIcon}><FaSearch size={16} /></div>
                 <input ref={inputRef} type="text" placeholder="Durak adı giriniz..." onInput={() => setSearchedValue(inputRef.current!.value)} />
             </div>
 
