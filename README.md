@@ -38,3 +38,5 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+
+[{"KalanDurakSayisi":4,"HattinYonu":1,"KoorY":"27,07313","BisikletAparatliMi":false,"KoorX":"38,38668333","EngelliMi":true,"HatNumarasi":879,"HatAdi":"F.ALTAY - GAZİEMİR SEMT GARAJI","OtobusId":12323},{"KalanDurakSayisi":4,"HattinYonu":1,"KoorY":"27,07306667","BisikletAparatliMi":false,"KoorX":"38,38650167","EngelliMi":true,"HatNumarasi":681,"HatAdi":"F.ALTAY - LOZAN MEYDANI","OtobusId":11056},{"KalanDurakSayisi":4,"HattinYonu":1,"KoorY":"27,07006667","BisikletAparatliMi":false,"KoorX":"38,39603","EngelliMi":false,"HatNumarasi":879,"HatAdi":"F.ALTAY - GAZİEMİR SEMT GARAJI","OtobusId":3025}]

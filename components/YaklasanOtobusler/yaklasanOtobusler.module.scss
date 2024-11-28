@@ -1,0 +1,65 @@
+.bus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+
+    &.active {
+        .busNo {
+            color: #f28621;
+        }
+    }
+}
+
+.busNo {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.stationsLeft {
+    font-size: 16px;
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bikeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007f5f;
+}
+
+.disabledIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0466c8;
+}

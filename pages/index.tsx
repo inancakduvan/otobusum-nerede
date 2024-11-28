@@ -1,21 +1,23 @@
 import Head from "next/head";
-import { useEffect } from "react";
 import OtobusHatlari from "@/components/OtobusHatlari/OtobusHatlari";
+import { useEffect, useLayoutEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Home() {
-  const getDownloads = async () => {
-    fetch("/api/crawler").then(function(response) { return response.text(); })
-    .then(function(text) {
-        console.log(text)
-    });
-  }
+  const router = useRouter();
+  
+  useLayoutEffect(() => {
+      const resizeOps = () => {
+          document.documentElement.style.setProperty("--vh", window.innerHeight * 0.01 + "px");
+      };
 
+      resizeOps();
+      window.addEventListener("resize", resizeOps);
+  }, [])
 
-    useEffect(() => {
-      console.log("jashdjsahd")
-        getDownloads();
-
-    }, [])
+  useEffect(() => {
+    router.push("/duraklar");
+  }, [])
 
   return (
     <>
@@ -25,8 +27,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      <OtobusHatlari />
     </>
   );
 }
