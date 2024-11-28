@@ -13,24 +13,24 @@ const YaklasanOtobusler = () => {
 
     const [busComings, setBusComings] = useState<Array<any>>([]);
 
-        const fetchData = async (fetches: any) => {
+        const fetchData = async (fetches: Array<any>) => {
             try {
-                const correctDirections: any = {
+                const correctDirections: { "gidis": number, "donus": number} = {
                     "gidis": 1,
                     "donus": 2
                 }
 
-                const correctDirection: any = correctDirections[direction];
+                const correctDirection = direction === "gidis" ? correctDirections.gidis : correctDirections.donus;
 
-                const jsons = fetches.map((item: any) => fetch(item.url))
+                const jsons = fetches.map((item: { url: string }) => fetch(item.url))
 
                 const responsesJSON = await Promise.all(jsons);
                 const responses = (await Promise.all(responsesJSON.map(r => r.json()))).flat();
-                const successfulResponses = responses.filter((item: any) => !item.message);
-                const filteredResponse =  correctDirection ? successfulResponses.filter((item: any) => item.HattinYonu === correctDirection) : [];
+                const successfulResponses = responses.filter((item: {message: string}) => !item.message);
+                const filteredResponse =  correctDirection ? successfulResponses.filter((item: {HattinYonu: number}) => item.HattinYonu === correctDirection) : [];
                 
                 const uniqueData = filteredResponse.reduce((acc, current) => {
-                    const isDuplicate = acc.some((item: any) => item.HatNumarasi === current.HatNumarasi);
+                    const isDuplicate = acc.some((item: { HatNumarasi: number }) => item.HatNumarasi === current.HatNumarasi);
                   
                     if (!isDuplicate) {
                       acc.push(current);
