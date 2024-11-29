@@ -30,7 +30,14 @@ const YaklasanOtobusler = () => {
 
                 const responsesJSON = await Promise.all(jsons);
                 const responses = (await Promise.all(responsesJSON.map(r => r.json()))).flat();
+                const failedResponse = responses.find((item: {message: string}) => item.message);
+
+                if (failedResponse) {
+                    return;
+                }
+
                 const successfulResponses = responses.filter((item: {message: string}) => !item.message);
+
                 const filteredResponse =  correctDirection ? successfulResponses.filter((item: {HattinYonu: number}) => item.HattinYonu === correctDirection) : [];
                 
                 const uniqueData = filteredResponse.reduce((acc, current) => {
@@ -83,7 +90,7 @@ const YaklasanOtobusler = () => {
     }, [busNo])
 
     return (
-        <>
+        <div className={styles.wrapper}>
             <div className="breadcrumbs">
                 <div className="breadcrumbs-item" onClick={() => router.push("/duraklar")}>{busNo} Numaralı Otobüs</div>
                 <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
@@ -117,10 +124,10 @@ const YaklasanOtobusler = () => {
                         </div>
                     </div>)
                     :
-                    <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır</div>
+                    <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır.</div>
                 }
             </div>
-        </>
+        </div>
     )
 }
 
