@@ -18,6 +18,7 @@ const OtobusDuraklari = () => {
     const [searchedValue, setSearchedValue] = useState("");
     const [busDirectionStart, setBusDirectionStart] = useState("");
     const [busDirectionEnd, setBusDirectionEnd] = useState("");
+    const [isStationsLoaded, setStationsLoaded] = useState(false);
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -81,6 +82,10 @@ const OtobusDuraklari = () => {
         } else {
             setCurrentStations(stations2);
         }
+        
+        if (stations1.length > 0 && stations2.length > 0) {
+            setStationsLoaded(true);
+        }
     }, [showStations1, stations1, stations2])
     
     const fuseOptions = {
@@ -120,6 +125,18 @@ const OtobusDuraklari = () => {
                 <div className={styles.searchIcon}><FaSearch size={16} /></div>
                 <input ref={inputRef} type="text" placeholder="Durak adı giriniz..." onInput={() => setSearchedValue(inputRef.current!.value)} />
             </div>
+                
+            {
+                !isStationsLoaded && <div className="skeletton--isloading">
+                    <div className="loading-content">
+                        <div className="loading-text-container">
+                        <div className="loading-main-text"></div>
+                        <div className="loading-sub-text"></div>
+                        </div>
+                        <div className="loading-btn"></div>
+                    </div>
+                </div>
+            }
 
             <div className={styles.list}>
                 {
