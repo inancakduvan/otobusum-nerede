@@ -99,7 +99,7 @@ const YaklasanOtobusler = () => {
                         </div>
                     </div>)
                     :
-                    isDataLoaded && <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaraları otobüs bulunmamaktadır.</div>
+                    isDataLoaded && <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>
                 }
 
                 <div className={styles.othersTitle}>YAKLAŞAN DİĞER OTOBÜSLER</div>
