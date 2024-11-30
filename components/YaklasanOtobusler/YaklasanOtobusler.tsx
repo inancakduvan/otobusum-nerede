@@ -18,13 +18,16 @@ const YaklasanOtobusler = () => {
 
     // @typescript-eslint/no-explicit-any
     const [busComings, setBusComings] = useState<Array<any>>([]);
+    const [targetBus, setTargetBus] = useState<Array<any>>([]);
 
     const fetchData = () => {
         fetch("https://openapi.izmir.bel.tr/api/iztek/duragayaklasanotobusler/" + stationId).then(function(response) { return response.json(); })
         .then(function(json) {
-            const filteredResultBasedOnDirection = json.filter((item: { HattinYonu: string }) => item.HattinYonu == direction);
+            const targetBus = json.find((item: { HatNumarasi: number }) => item.HatNumarasi.toString() === busNo);
+            const filteredResultBasedOnDirection = json.filter((item: { HattinYonu: string, HatNumarasi: number }) => item.HattinYonu == direction && item.HatNumarasi.toString() !== busNo);
 
             setBusComings(filteredResultBasedOnDirection);
+            targetBus && setTargetBus([targetBus]);
             setIsDataLoaded(true);
         });
     };
@@ -81,6 +84,26 @@ const YaklasanOtobusler = () => {
 
             <div className={styles.busComings}>
                 {
+                    targetBus.length > 0 ?
+                    targetBus.map((bus) => <div key={"yaklasan-" + bus.HatNumarasi} className={styles.bus + " " + styles.target + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
+                        <div className={styles.left}>
+                            <div className={styles.busNo}>{bus.HatNumarasi}</div>
+
+                            {bus.BisikletAparatliMi && <div className={styles.bikeIcon}><FaBiking /></div>}
+
+                            {bus.EngelliMi && <div className={styles.disabledIcon}><FaWheelchair /></div>}
+                        </div>
+
+                        <div className={styles.right}>
+                            <div className={styles.stationsLeft}>{bus.KalanDurakSayisi} durak</div>
+                        </div>
+                    </div>)
+                    :
+                    isDataLoaded && <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaraları otobüs bulunmamaktadır.</div>
+                }
+
+                <div className={styles.othersTitle}>YAKLAŞAN DİĞER OTOBÜSLER</div>
+                {
                     busComings.length > 0 ?
                     busComings.map((bus) => <div key={"yaklasan-" + bus.HatNumarasi} className={styles.bus + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
                         <div className={styles.left}>
@@ -96,7 +119,7 @@ const YaklasanOtobusler = () => {
                         </div>
                     </div>)
                     :
-                    isDataLoaded && <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır.</div>
+                    isDataLoaded && <div className={styles.noData}>Yaklaşan başka otobüs bulunmamaktadır.</div>
                 }
             </div>
         </div>

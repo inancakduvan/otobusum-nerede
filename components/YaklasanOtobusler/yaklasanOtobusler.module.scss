@@ -15,8 +15,19 @@
 
     &.active {
         .busNo {
-            color: #f28621;
+            color: #ec782a;
         }
+
+        .stationsLeft {
+            font-weight: 600;
+        }
+    }
+
+    &.target {
+        margin: 16px;
+        background: #fff1e6;
+        border: 1px solid #ffdbbe;
+        border-radius: 4px;
     }
 }
 
@@ -83,6 +94,26 @@
 
 .noData {
     padding: 16px;
+    margin: 0 16px;
+    font-size: 14px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.noDataTarget {
+    padding: 16px;
+    margin: 16px 16px 0 16px;
+    font-size: 14px;
+    background: #fff1e6;
+    border: 1px solid #ffdbbe;
+    border-radius: 4px;
+    
+    span {
+        font-weight: 600;
+        color: #ec782a;
+        font-size: 18px;
+    }
 }
 
 .busDirection {
@@ -105,4 +136,13 @@
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+.othersTitle {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #7c7c7c;
 }
