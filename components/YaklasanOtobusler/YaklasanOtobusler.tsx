@@ -129,7 +129,8 @@ const YaklasanOtobusler = () => {
                     isDataLoaded && <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>
                 }
 
-                <div className={styles.othersTitle}>YAKLAŞAN DİĞER OTOBÜSLER</div>
+                {isDataLoaded && <div className={styles.othersTitle}>YAKLAŞAN DİĞER OTOBÜSLER</div>}
+                
                 {
                     busComings.length > 0 ?
                     busComings.map((bus) => <div key={"yaklasan-" + bus.HatNumarasi} className={styles.bus + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
