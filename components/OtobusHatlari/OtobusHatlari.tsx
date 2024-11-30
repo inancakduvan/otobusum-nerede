@@ -6,7 +6,7 @@ import data from "../../data/eshot-otobus-hatlari.json";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FaArrowRight, FaBus, FaHeart, FaLine, FaSearch } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBus, FaHeart, FaLine, FaSearch } from "react-icons/fa";
 
 const OtobusHatlari = () => {
     const router = useRouter();
@@ -54,7 +54,10 @@ const OtobusHatlari = () => {
 
     return (<>
         <div className={styles.wrapper}>
-            <div className={styles.header}>{isShowFavs ? "FAVORİLERİNİZ" : "HAT SEÇİNİZ"}</div>
+            <div className={styles.header}>
+                {isShowFavs && <span className={styles.backButton} onClick={() => setIsShowFavs(false)}><FaArrowLeft /></span>            }
+                {isShowFavs ? "FAVORİLERİNİZ" : "HAT SEÇİNİZ"}
+            </div>
 
             {
                 !isShowFavs && <div className={styles.search}>

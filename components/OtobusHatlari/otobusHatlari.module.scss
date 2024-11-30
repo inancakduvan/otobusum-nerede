@@ -42,6 +42,7 @@
 }
 
 .header {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,6 +96,7 @@
 .noData {
     padding: 16px;
     margin: 0 16px;
+    margin-top: 16px;
     font-size: 14px;
     background: #fafafa;
     border: 1px solid #eee;
@@ -125,4 +127,14 @@
         width: 16px;
         border: 1px dashed #ddd;
     }
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
