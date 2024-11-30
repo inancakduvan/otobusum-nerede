@@ -11,70 +11,30 @@ const YaklasanOtobusler = () => {
     const stationName = router.query.stationName ? router.query.stationName.toString() : "";
     const busNo = router.query.busNo ? router.query.busNo.toString() : "";
     const direction = router.query.direction ? router.query.direction.toString() : "";
+    const stationId = router.query.stationId ? router.query.stationId.toString() : "";
     const [busDirectionStart, setBusDirectionStart] = useState("");
     const [busDirectionEnd, setBusDirectionEnd] = useState("");
+    const [isDataLoaded, setIsDataLoaded] = useState(false);
 
     // @typescript-eslint/no-explicit-any
     const [busComings, setBusComings] = useState<Array<any>>([]);
 
-        const fetchData = async (fetches: Array<any>) => {
-            try {
-                const correctDirections: { "gidis": number, "donus": number} = {
-                    "gidis": 1,
-                    "donus": 2
-                }
+    const fetchData = () => {
+        fetch("https://openapi.izmir.bel.tr/api/iztek/duragayaklasanotobusler/" + stationId).then(function(response) { return response.json(); })
+        .then(function(json) {
+            const filteredResultBasedOnDirection = json.filter((item: { HattinYonu: string }) => item.HattinYonu == direction);
 
-                const correctDirection = direction === "gidis" ? correctDirections.gidis : correctDirections.donus;
-
-                const jsons = fetches.map((item: { url: string }) => fetch(item.url))
-
-                const responsesJSON = await Promise.all(jsons);
-                const responses = (await Promise.all(responsesJSON.map(r => r.json()))).flat();
-                const failedResponse = responses.find((item: {message: string}) => item.message);
-
-                if (failedResponse) {
-                    return;
-                }
-
-                const successfulResponses = responses.filter((item: {message: string}) => !item.message);
-
-                const filteredResponse =  correctDirection ? successfulResponses.filter((item: {HattinYonu: number}) => item.HattinYonu === correctDirection) : [];
-                
-                const uniqueData = filteredResponse.reduce((acc, current) => {
-                    const isDuplicate = acc.some((item: { HatNumarasi: number }) => item.HatNumarasi === current.HatNumarasi);
-                  
-                    if (!isDuplicate) {
-                      acc.push(current);
-                    }
-                    return acc;
-                  }, []);
-
-                setBusComings(uniqueData);
-            } catch (err) {
-                throw err;
-            }
-      };
+            setBusComings(filteredResultBasedOnDirection);
+            setIsDataLoaded(true);
+        });
+    };
 
     useEffect(() => {
         if (data.length === 0 || !stationName) {
             return;
         }
 
-        let targetStations = data.filter((item) => item.DURAK_ADI.toLowerCase() == stationName.toLowerCase());
-        targetStations = targetStations.filter((item) => {
-            const buses = item.DURAKTAN_GECEN_HATLAR.split("-");
-
-            return buses.includes(busNo);
-        })
-
-        const jsons = targetStations.map((item) => {
-            return {
-                url: "https://openapi.izmir.bel.tr/api/iztek/duragayaklasanotobusler/" + item.DURAK_ID,
-                key: item.DURAK_ID
-            }
-        })
-
-        fetchData(jsons);
+        fetchData();
     }, [data, stationName])
     
     useEffect(() => {
@@ -106,6 +66,18 @@ const YaklasanOtobusler = () => {
                     {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
                 </div>}
             </div>
+            
+            {
+                !isDataLoaded && <div className="skeletton--isloading">
+                    <div className="loading-content">
+                        <div className="loading-text-container">
+                        <div className="loading-main-text"></div>
+                        <div className="loading-sub-text"></div>
+                        </div>
+                        <div className="loading-btn"></div>
+                    </div>
+                </div>
+            }
 
             <div className={styles.busComings}>
                 {
@@ -124,7 +96,7 @@ const YaklasanOtobusler = () => {
                         </div>
                     </div>)
                     :
-                    <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır.</div>
+                    isDataLoaded && <div className={styles.noData}>Yaklaşan otobüs bulunmamaktadır.</div>
                 }
             </div>
         </div>

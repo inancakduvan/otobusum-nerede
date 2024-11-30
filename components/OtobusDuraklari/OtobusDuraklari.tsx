@@ -64,15 +64,23 @@ const OtobusDuraklari = () => {
 
     useEffect(() => {
         if (busNo) {
-            getStations1();
-            getStations2();
-
             const bus = data.find((item) => item.HAT_NO.toString() === busNo);
             
             if (bus) {
                 setBusDirectionStart(bus.HAT_BASLANGIC);
                 setBusDirectionEnd(bus.HAT_BITIS);
             }
+
+            fetch("/api/duraklar1?busNo=" + busNo).then(function(response) { return response.json(); })
+            .then(function(json) {
+                console.log(json);
+                setStations1(json);
+            });
+
+            fetch("/api/duraklar2?busNo=" + busNo).then(function(response) { return response.json(); })
+            .then(function(json) {
+                setStations2(json);
+            });
         }
     }, [busNo])
 
@@ -83,6 +91,7 @@ const OtobusDuraklari = () => {
             setCurrentStations(stations2);
         }
         
+
         if (stations1.length > 0 && stations2.length > 0) {
             setStationsLoaded(true);
         }
@@ -140,8 +149,8 @@ const OtobusDuraklari = () => {
 
             <div className={styles.list}>
                 {
-                    (searchResults.length === 0 ? currentStations : searchResults).map((item: string, index: number) => <div key={"stationName" + item + index} className={styles.listItem} onClick={() => router.push("/yaklasanotobusler/" + item + "/" + busNo + "/" + (showStations1 ? "gidis" : "donus"))}> 
-                        {item}
+                    (searchResults.length === 0 ? currentStations : searchResults).map((item: { DurakId: number, Adi: string }, index: number) => <div key={"stationName" + item + index} className={styles.listItem} onClick={() => router.push("/yaklasanotobusler/" + item.Adi + "/" + busNo + "/" + (showStations1 ? "1" : "2") + "/" + item.DurakId)}> 
+                        {item.Adi}
                     </div>)
                 }
             </div>
