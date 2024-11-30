@@ -6,7 +6,7 @@ import data from "../../data/eshot-otobus-hatlari.json";
 import { useRouter } from "next/router";
 import Fuse from "fuse.js";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaBus, FaHeart, FaLine, FaSearch } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBus, FaDotCircle, FaHeart, FaLine, FaSearch } from "react-icons/fa";
 
 const OtobusHatlari = () => {
     const router = useRouter();
@@ -82,8 +82,8 @@ const OtobusHatlari = () => {
                         favs.map((item) => <div key={"favs-" + item} className={styles.listItem} onClick={() => router.push(getFavItemUrl(item))}> 
                             <div className={styles.busName + " " + styles.favItemWrapper}>
                                 <div className={styles.favItemName}>
-                                    <span>{getFavItemInfo(item).busNo}</span> <span className={styles.favItemIcon}></span>
-                                    {getFavItemInfo(item).stationName} <span className={styles.favItemIcon}></span>
+                                    <span>{getFavItemInfo(item).busNo}</span> <span className={styles.favItemIcon}><FaDotCircle size={4} /><FaDotCircle size={4} /><FaDotCircle size={4} /></span>
+                                    {getFavItemInfo(item).stationName} <span className={styles.favItemIcon}><FaDotCircle size={4} /><FaDotCircle size={4} /><FaDotCircle size={4} /></span>
                                     {getFavItemInfo(item).direction}
                                 </div>
 
@@ -98,7 +98,7 @@ const OtobusHatlari = () => {
 
             <div className={styles.showFavsButton + " " + (isShowFavs ? styles.active : "") } onClick={() => setIsShowFavs(!isShowFavs)}>
                 {!isShowFavs ? <FaHeart /> : <FaBus />}
-                {!isShowFavs ? "Favorileri göster" : "Tüm Hatları Göster"}
+                {!isShowFavs ? "Favorileri Göster" : "Tüm Hatları Göster"}
             </div>
         </div>
     </>)

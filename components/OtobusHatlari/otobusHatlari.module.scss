@@ -122,10 +122,11 @@
     }
 
     .favItemIcon {
-        background: transparent;
-        height: 0px;
-        width: 16px;
-        border: 1px dashed #ddd;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #ddd;
     }
 }
 
