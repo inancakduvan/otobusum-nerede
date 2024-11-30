@@ -22,46 +22,6 @@ const OtobusDuraklari = () => {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const getStations1 = async () => {
-      fetch("/api/crawler?busNo=" + busNo).then(function(response) { return response.text(); })
-      .then(function(text) {
-            const stations = [];
-            const ul = document.createElement("ul");
-            const _text = `${text}`;
-
-            ul.innerHTML = _text;
-            const listItems = ul.querySelectorAll("li");
-
-            for (let i = 0; i < listItems.length; i++) {
-                const li = listItems[i];
-                const stationName = li.querySelector(".station-name")?.textContent;
-                stations.push(stationName);
-            }
-
-            setStations1(stations);
-      });
-    }
-
-    const getStations2 = async () => {
-      fetch("/api/crawler2?busNo=" + busNo).then(function(response) { return response.text(); })
-      .then(function(text) {
-        const stations = [];
-        const ul = document.createElement("ul");
-        const _text = `${text}`;
-
-        ul.innerHTML = _text;
-        const listItems = ul.querySelectorAll("li");
-
-        for (let i = 0; i < listItems.length; i++) {
-            const li = listItems[i];
-            const stationName = li.querySelector(".station-name")?.textContent;
-            stations.push(stationName);
-        }
-
-        setStations2(stations);
-      });
-    }
-
     useEffect(() => {
         if (busNo) {
             const bus = data.find((item) => item.HAT_NO.toString() === busNo);
