@@ -50,7 +50,6 @@ const OtobusDuraklari = () => {
         } else {
             setCurrentStations(stations2);
         }
-        
 
         if (stations1.length > 0 && stations2.length > 0) {
             setStationsLoaded(true);
