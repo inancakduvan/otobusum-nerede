@@ -146,3 +146,33 @@
     font-size: 16px;
     color: #7c7c7c;
 }
+
+.favButton {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s;
+
+    &.active {
+        svg path {
+            fill: #ef233c;
+            stroke-width: 40px;
+            stroke: #ef233c;
+        }
+    }
+
+    svg {
+        width: 30px;
+
+        path {
+            fill: transparent;
+            stroke-width: 40px;
+            stroke: #ef233c;
+        }
+    }
+}

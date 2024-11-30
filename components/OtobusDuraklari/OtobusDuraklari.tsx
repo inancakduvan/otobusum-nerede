@@ -58,6 +58,7 @@ const OtobusDuraklari = () => {
     }, [showStations1, stations1, stations2])
     
     const fuseOptions = {
+        keys: ["Adi", "DurakId"],
         threshold: 0.5
     };
     

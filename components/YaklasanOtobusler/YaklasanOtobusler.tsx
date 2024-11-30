@@ -4,7 +4,7 @@ import dataHatlar from "../../data/eshot-otobus-hatlari.json";
 
 import styles from "./yaklasanOtobusler.module.scss";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaBiking, FaWheelchair } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBiking, FaHeart, FaStar, FaWheelchair } from "react-icons/fa";
 
 const YaklasanOtobusler = () => {
     const router = useRouter();
@@ -15,6 +15,7 @@ const YaklasanOtobusler = () => {
     const [busDirectionStart, setBusDirectionStart] = useState("");
     const [busDirectionEnd, setBusDirectionEnd] = useState("");
     const [isDataLoaded, setIsDataLoaded] = useState(false);
+    const [isFav, setIsFav] = useState(false);
 
     // @typescript-eslint/no-explicit-any
     const [busComings, setBusComings] = useState<Array<any>>([]);
@@ -32,6 +33,24 @@ const YaklasanOtobusler = () => {
         });
     };
 
+    const favItem = () => {
+        const localFavs = localStorage.getItem("IA_otobusum_nerede_favs");
+        const favs = localFavs ? JSON.parse(localFavs) : [];
+        const favItemKey = busNo + "-" + stationName + "-" + (direction === "1" ? "Gidiş" : "Dönüş") + "-" + stationId;
+
+        if (favs) {
+            if (isFav) {
+                    const newFavs = favs.filter((item: any) => item !== favItemKey);
+
+                    localStorage.setItem("IA_otobusum_nerede_favs", JSON.stringify(newFavs));
+            } else {
+                localStorage.setItem("IA_otobusum_nerede_favs", JSON.stringify([...favs, favItemKey]));
+            }
+        }
+
+        setIsFav(!isFav);
+    }
+
     useEffect(() => {
         if (data.length === 0 || !stationName) {
             return;
@@ -42,6 +61,12 @@ const YaklasanOtobusler = () => {
     
     useEffect(() => {
         if (busNo) {
+            const localFavs = localStorage.getItem("IA_otobusum_nerede_favs");
+            const favs = localFavs ? JSON.parse(localFavs) : [];
+            const favItemKey = busNo + "-" + stationName + "-" + (direction === "1" ? "Gidiş" : "Dönüş") + "-" + stationId;
+            const _isFav = favs.find((item: string) => item === favItemKey);
+    
+            setIsFav(_isFav ? true : false);
 
             const bus = dataHatlar.find((item) => item.HAT_NO.toString() === busNo);
             
@@ -68,6 +93,8 @@ const YaklasanOtobusler = () => {
                 { (busDirectionStart && busDirectionEnd) && <div className={styles.busDirection}>
                     {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
                 </div>}
+
+                <span className={styles.favButton + " " + (isFav ? styles.active : "")} onClick={favItem}><FaHeart /></span>
             </div>
             
             {
