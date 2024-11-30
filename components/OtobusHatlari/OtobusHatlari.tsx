@@ -71,7 +71,7 @@ const OtobusHatlari = () => {
                 <div className={styles.list}>
                     {
                         (searchResults.length === 0 ? data : searchResults).map((item) => <div key={"otobus-hatlari-" + item.HAT_NO} className={styles.listItem} onClick={() => router.push("/hat/" + item.HAT_NO)}> 
-                            <div className={styles.busNo}>{item.HAT_NO}</div> <div className={styles.busName}>({item.HAT_ADI})</div>
+                            <div className={styles.busNo}>{item.HAT_NO}</div> <div className={styles.busName}>{item.HAT_ADI}</div>
                         </div>)
                     }
                 </div> 
