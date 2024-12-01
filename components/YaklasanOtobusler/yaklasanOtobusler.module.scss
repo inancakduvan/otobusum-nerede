@@ -15,7 +15,7 @@
 
     &.active {
         .busNo {
-            color: #ec782a;
+            color: rgba(22, 101, 52, 1);
         }
 
         .stationsLeft {
@@ -25,8 +25,8 @@
 
     &.target {
         margin: 16px;
-        background: #fff1e6;
-        border: 1px solid #ffdbbe;
+        background: #effdf4;
+        border: 1px solid #90f99c;
         border-radius: 4px;
     }
 }
@@ -105,13 +105,13 @@
     padding: 16px;
     margin: 16px 16px 0 16px;
     font-size: 14px;
-    background: #fff1e6;
-    border: 1px solid #ffdbbe;
+    background: #ffebeb;
+    border: 1px solid #fe6d68;
     border-radius: 4px;
     
     span {
         font-weight: 600;
-        color: #ec782a;
+        color: #ea3832;
         font-size: 18px;
     }
 }

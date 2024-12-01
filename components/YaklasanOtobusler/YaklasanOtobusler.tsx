@@ -6,8 +6,6 @@ import styles from "./yaklasanOtobusler.module.scss";
 import { useEffect, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaBiking, FaHeart, FaStar, FaWheelchair } from "react-icons/fa";
 
-let isFetched = false;
-
 const YaklasanOtobusler = () => {
     const router = useRouter();
     const stationName = router.query.stationName ? router.query.stationName.toString() : "";
@@ -54,13 +52,11 @@ const YaklasanOtobusler = () => {
     }
 
     useEffect(() => {
-        if (data.length === 0 || !stationName || isFetched) {
+        if (data.length === 0 || !stationName) {
             return;
         }
         
         fetchData();
-
-        isFetched = true;
     }, [data, stationName])
     
     useEffect(() => {
