@@ -33,7 +33,6 @@ const OtobusDuraklari = () => {
 
             fetch("/api/duraklar1?busNo=" + busNo).then(function(response) { return response.json(); })
             .then(function(json) {
-                console.log(json);
                 setStations1(json);
             });
 
