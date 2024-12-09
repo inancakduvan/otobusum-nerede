@@ -45,18 +45,21 @@ const YaklasanOtobusler = () => {
                 fetch(`/api/directions?originX=${_station.ENLEM}&originY=${_station.BOYLAM}&destinationX=${targetBus.KoorX.split(",").join(".")}&destinationY=${targetBus.KoorY.split(",").join(".")}`).then(function(response) { return response.json(); })
                 .then(function(data) {
                     if (data.routes && data.routes.length > 0) {
-                        const busNumber = targetBus.HatNumarasi;
-
-                        const steps = data.routes[0].legs[0].steps.filter(
-                          (step: any) =>
-                            step.transit_details &&
-                            step.transit_details.line.short_name == busNumber
-                        );
-                  
-                        if (steps.length > 0) {
-                            setBusStationInfo(steps[0])
+                        if (data.routes[0].legs && data.routes[0].legs.length > 0) {
+                            setBusStationInfo(data.routes[0].legs[0]);
                         }
-                      }
+                        // const busNumber = targetBus.HatNumarasi;
+
+                        // const steps = data.routes[0].legs[0].steps.filter(
+                        //   (step: any) =>
+                        //     step.transit_details &&
+                        //     step.transit_details.line.short_name == busNumber
+                        // );
+                  
+                        // if (steps.length > 0) {
+                        //     setBusStationInfo(steps[0])
+                        // }
+                    }
                 });
             }
 
