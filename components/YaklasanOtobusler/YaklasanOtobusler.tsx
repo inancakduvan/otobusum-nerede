@@ -22,6 +22,21 @@ const YaklasanOtobusler = () => {
     const [busComings, setBusComings] = useState<Array<any>>([]);
     const [targetBus, setTargetBus] = useState<Array<any>>([]);
 
+    const convertTimeLeft = (distance: number, _time: number) => {
+        let km = distance / 1000;
+        let time = _time / 60;
+
+        if (km > 5 && km <= 10) {
+            time = time * 1.5;
+        } else if (km > 10 && km <= 20) {
+            time = time * 2;
+        } else if (km > 20) {
+            time = time * 2.5;
+        }
+
+        return time.toFixed(0);
+    }
+
     const fetchData = () => {
         fetch("https://openapi.izmir.bel.tr/api/iztek/duragayaklasanotobusler/" + stationId).then(function(response) { return response.json(); })
         .then(function(json) {
@@ -42,7 +57,7 @@ const YaklasanOtobusler = () => {
 
             const _station = data.find((item) => item.DURAK_ID.toString() === stationId);
             if (_station && targetBus) {
-                fetch(`/api/directions?originX=${_station.ENLEM}&originY=${_station.BOYLAM}&destinationX=${targetBus.KoorX.split(",").join(".")}&destinationY=${targetBus.KoorY.split(",").join(".")}`).then(function(response) { return response.json(); })
+                fetch(`/api/directions?originX=${targetBus.KoorX.split(",").join(".")}&originY=${targetBus.KoorY.split(",").join(".")}&destinationX=${_station.ENLEM}&destinationY=${_station.BOYLAM}`).then(function(response) { return response.json(); })
                 .then(function(data) {
                     if (data.routes && data.routes.length > 0) {
                         if (data.routes[0].legs && data.routes[0].legs.length > 0) {
@@ -165,7 +180,7 @@ const YaklasanOtobusler = () => {
                         busStationInfo && <div className={styles.bottom}>
                             <div className={styles.durationLeft}>
                                 <span className={styles.durationLeftKm}><span><FaBus /></span> ~ {busStationInfo.distance.text}</span>
-                                <span className={styles.durationLeftTime}><span><FaClock /></span> ~ {busStationInfo.duration.text.split("mins").join("dakika")}</span>
+                                <span className={styles.durationLeftTime}><span><FaClock /></span> ~ {convertTimeLeft(busStationInfo.distance.value, busStationInfo.duration.value)} dakika</span>
                             </div>
                         </div>
                        } 
