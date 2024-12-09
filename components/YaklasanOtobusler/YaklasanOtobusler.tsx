@@ -4,7 +4,7 @@ import dataHatlar from "../../data/eshot-otobus-hatlari.json";
 
 import styles from "./yaklasanOtobusler.module.scss";
 import { useEffect, useState } from "react";
-import { FaArrowLeft, FaArrowRight, FaBiking, FaHeart, FaStar, FaWheelchair } from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaBiking, FaBus, FaClock, FaHeart, FaWheelchair } from "react-icons/fa";
 
 const YaklasanOtobusler = () => {
     const router = useRouter();
@@ -14,6 +14,7 @@ const YaklasanOtobusler = () => {
     const stationId = router.query.stationId ? router.query.stationId.toString() : "";
     const [busDirectionStart, setBusDirectionStart] = useState("");
     const [busDirectionEnd, setBusDirectionEnd] = useState("");
+    const [busStationInfo, setBusStationInfo] = useState<any>(null);
     const [isDataLoaded, setIsDataLoaded] = useState(false);
     const [isFav, setIsFav] = useState(false);
 
@@ -24,11 +25,41 @@ const YaklasanOtobusler = () => {
     const fetchData = () => {
         fetch("https://openapi.izmir.bel.tr/api/iztek/duragayaklasanotobusler/" + stationId).then(function(response) { return response.json(); })
         .then(function(json) {
-            const targetBus = json.find((item: { HatNumarasi: number }) => item.HatNumarasi.toString() === busNo);
+            if (!json) {
+                return;
+            }
+
+            if (!Array.isArray(json)) {
+                return;
+            }
+
+            const targetBus = json.find((item: { HatNumarasi: number, KoorX: string, KoorY: string }) => item.HatNumarasi.toString() === busNo && (item.KoorX !== "0" || item.KoorY !== "0"));
             const filteredResultBasedOnDirection = json.filter((item: { HattinYonu: string, HatNumarasi: number }) => item.HattinYonu == direction && item.HatNumarasi.toString() !== busNo);
 
             setBusComings(filteredResultBasedOnDirection);
             targetBus && setTargetBus([targetBus]);
+
+
+            const _station = data.find((item) => item.DURAK_ID.toString() === stationId);
+            if (_station && targetBus) {
+                fetch(`/api/directions?originX=${_station.ENLEM}&originY=${_station.BOYLAM}&destinationX=${targetBus.KoorX.split(",").join(".")}&destinationY=${targetBus.KoorY.split(",").join(".")}`).then(function(response) { return response.json(); })
+                .then(function(data) {
+                    if (data.routes && data.routes.length > 0) {
+                        const busNumber = targetBus.HatNumarasi;
+
+                        const steps = data.routes[0].legs[0].steps.filter(
+                          (step: any) =>
+                            step.transit_details &&
+                            step.transit_details.line.short_name == busNumber
+                        );
+                  
+                        if (steps.length > 0) {
+                            setBusStationInfo(steps[0])
+                        }
+                      }
+                });
+            }
+
             setIsDataLoaded(true);
         });
     };
@@ -113,17 +144,28 @@ const YaklasanOtobusler = () => {
                 {
                     targetBus.length > 0 ?
                     targetBus.map((bus) => <div key={"yaklasan-" + bus.HatNumarasi} className={styles.bus + " " + styles.target + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
-                        <div className={styles.left}>
-                            <div className={styles.busNo}>{bus.HatNumarasi}</div>
+                        <div className={styles.top}>
+                            <div className={styles.left}>
+                                <div className={styles.busNo}>{bus.HatNumarasi}</div>
 
-                            {bus.BisikletAparatliMi && <div className={styles.bikeIcon}><FaBiking /></div>}
+                                {bus.BisikletAparatliMi && <div className={styles.bikeIcon}><FaBiking /></div>}
 
-                            {bus.EngelliMi && <div className={styles.disabledIcon}><FaWheelchair /></div>}
+                                {bus.EngelliMi && <div className={styles.disabledIcon}><FaWheelchair /></div>}
+                            </div>
+
+                            <div className={styles.right}>
+                                <div className={styles.stationsLeft}>{bus.KalanDurakSayisi} durak</div>
+                            </div>
                         </div>
 
-                        <div className={styles.right}>
-                            <div className={styles.stationsLeft}>{bus.KalanDurakSayisi} durak</div>
+                       {
+                        busStationInfo && <div className={styles.bottom}>
+                            <div className={styles.durationLeft}>
+                                <span className={styles.durationLeftKm}><span><FaBus /></span> ~ {busStationInfo.distance.text}</span>
+                                <span className={styles.durationLeftTime}><span><FaClock /></span> ~ {busStationInfo.duration.text.split("mins").join("dakika")}</span>
+                            </div>
                         </div>
+                       } 
                     </div>)
                     :
                     isDataLoaded && <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>
