@@ -34,9 +34,11 @@ const OtobusDuraklari = () => {
                 setBusDirectionEnd(bus.HAT_BITIS);
             }
 
+            // @ts-ignore
             const duraklar1 = dataDuraklar1[busNo];
             setStations1(duraklar1);
 
+            // @ts-ignore
             const duraklar2 = dataDuraklar2[busNo];
             setStations2(duraklar2);
 
