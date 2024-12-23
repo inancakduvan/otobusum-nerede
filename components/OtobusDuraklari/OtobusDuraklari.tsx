@@ -34,11 +34,11 @@ const OtobusDuraklari = () => {
                 setBusDirectionEnd(bus.HAT_BITIS);
             }
 
-            // @ts-expect-error
+            // @ts-expect-error response is unknown
             const duraklar1 = dataDuraklar1[busNo];
             setStations1(duraklar1);
 
-            // @ts-expect-error
+            // @ts-expect-error response is unknown
             const duraklar2 = dataDuraklar2[busNo];
             setStations2(duraklar2);
 
