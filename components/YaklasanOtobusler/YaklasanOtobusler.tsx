@@ -23,7 +23,7 @@ const YaklasanOtobusler = () => {
     const [targetBus, setTargetBus] = useState<Array<any>>([]);
 
     const convertTimeLeft = (distance: number, _time: number) => {
-        let km = distance / 1000;
+        const km = distance / 1000;
         let time = _time / 60;
 
         if (km > 5 && km <= 10) {
