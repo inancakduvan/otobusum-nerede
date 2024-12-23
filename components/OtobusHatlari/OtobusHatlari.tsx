@@ -24,7 +24,7 @@ const OtobusHatlari = () => {
     useEffect(() => {
         const localFavs = localStorage.getItem("IA_otobusum_nerede_favs");
         const favs = localFavs ? JSON.parse(localFavs) : [];
-        setFavs(favs);
+        setFavs(favs);    
     }, [])
     
     const fuse = useMemo(() => {

@@ -6,6 +6,9 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { FaArrowLeft, FaArrowRight, FaSearch } from "react-icons/fa";
 import Fuse from "fuse.js";
 import data from "../../data/eshot-otobus-hatlari.json";
+import dataDuraklar1 from "../../data/duraklar1.json";
+import dataDuraklar2 from "../../data/duraklar2.json";
+
 
 const OtobusDuraklari = () => {
     const router = useRouter();
@@ -31,15 +34,21 @@ const OtobusDuraklari = () => {
                 setBusDirectionEnd(bus.HAT_BITIS);
             }
 
-            fetch("/api/duraklar1?busNo=" + busNo).then(function(response) { return response.json(); })
-            .then(function(json) {
-                setStations1(json);
-            });
+            const duraklar1 = dataDuraklar1[busNo];
+            setStations1(duraklar1);
 
-            fetch("/api/duraklar2?busNo=" + busNo).then(function(response) { return response.json(); })
-            .then(function(json) {
-                setStations2(json);
-            });
+            const duraklar2 = dataDuraklar2[busNo];
+            setStations2(duraklar2);
+
+            // fetch("/api/duraklar1?busNo=" + busNo).then(function(response) { return response.json(); })
+            // .then(function(json) {
+                
+            // });
+
+            // fetch("/api/duraklar2?busNo=" + busNo).then(function(response) { return response.json(); })
+            // .then(function(json) {
+            //     setStations2(json);
+            // });
         }
     }, [busNo])
 
