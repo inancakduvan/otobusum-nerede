@@ -5,7 +5,6 @@ import ReactGA from "react-ga4";
 
 export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
-    console.log("33333")
     ReactGA.initialize("G-DG2HKRMEHC");
 
   }, [])
