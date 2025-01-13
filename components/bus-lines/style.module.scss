@@ -1,0 +1,134 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+    padding-bottom: 80px;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .listItem {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        font-size: 16px;
+        gap: 16px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        font-weight: 500;
+
+        .busNo {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .busName {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+        }
+    }
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 60px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.search {
+    position: relative;
+    padding: 8px;
+
+    input {
+        padding-left: 40px;
+    }
+}
+
+.searchIcon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    color: #ddd;
+}
+
+.showFavsButton {
+    z-index: 2;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    color: #fff;
+    background: #ef233c;
+    border-radius: 999px;
+    box-shadow: 5px 10px 10px -10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.noData {
+    padding: 16px;
+    margin: 0 16px;
+    margin-top: 16px;
+    font-size: 14px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.favItemWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+
+    .favItemName {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 16px;
+        margin-right: 16px;
+
+        span {
+            font-weight: 600;
+            font-size: 18px;
+        }
+    }
+
+    .favItemIcon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        color: #ddd;
+    }
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}

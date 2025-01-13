@@ -1,7 +1,10 @@
-import Image from "next/image";
+import BusLines from "@/components/bus-lines";
+import BusLinesContextProvider from "@/context/bus-lines";
 
 export default function Home() {
-  return (
-    <p>Home</p>
-  );
+  return (<>
+      <BusLinesContextProvider>
+        <BusLines />
+      </BusLinesContextProvider>
+  </>)
 }
