@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import "./globals.scss";
 
-import GoogleAnalytics from "@/components/core/google-analytics";
+import ClientSideCalculations from "@/components/core/client-side-calculations";
 
 import { Inter } from "next/font/google";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GoogleAnalytics />
+        <ClientSideCalculations />
 
         <div className="app-container">
           {children}
