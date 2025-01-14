@@ -12,7 +12,7 @@ export default function Header() {
     return (
         <>
         <div className="breadcrumbs">
-            <div className="breadcrumbs-item" onClick={() => router.push("/duraklar")}>{busNo} Numaralı Otobüs</div>
+            <div className="breadcrumbs-item" onClick={() => router.push("/")}>{busNo} Numaralı Otobüs</div>
             <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
             <div className="breadcrumbs-item" onClick={() => router.push("/hat/" + busNo)}>Durak Seçiniz</div>
             <div className="breadcrumbs-icon"><FaArrowRight size={12} /></div>
