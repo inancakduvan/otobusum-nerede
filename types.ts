@@ -50,3 +50,29 @@ export type ArrivingBus = {
     HatAdi: string;
     OtobusId: number;
 };
+
+export type GoogleDirectionsResponse = {
+    routes: {
+      legs: {
+        steps: {
+          start_location: {
+            lat: number;
+            lng: number;
+          };
+          end_location: {
+            lat: number;
+            lng: number;
+          };
+          distance: {
+            text: string;
+            value: number;
+          };
+          duration: {
+            text: string;
+            value: number;
+          };
+          html_instructions: string;
+        }[];
+      }[];
+    }[];
+};  
