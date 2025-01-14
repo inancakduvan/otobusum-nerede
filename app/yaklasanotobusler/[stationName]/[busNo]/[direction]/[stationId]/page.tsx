@@ -9,7 +9,7 @@ interface ArrivingBusesPageProps {
     };
 }
 
-export default function ArrivingBusesPage({ params }: ArrivingBusesPageProps) {
+export default async function ArrivingBusesPage({ params }: ArrivingBusesPageProps) {
     return (
         <div>
             <Header />
