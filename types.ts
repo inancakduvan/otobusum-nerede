@@ -54,6 +54,8 @@ export type ArrivingBus = {
 export type GoogleDirectionsResponse = {
     routes: {
       legs: {
+        distance: any;
+        duration: any;
         steps: {
           start_location: {
             lat: number;
