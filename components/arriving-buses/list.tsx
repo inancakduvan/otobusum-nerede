@@ -1,29 +1,18 @@
 import styles from "./style.module.scss";
 
 import { Suspense } from "react";
+
 import { fetchArrivingBuses } from "@/requests"
 import { ArrivingBus } from "@/types";
 import { FaBiking, FaWheelchair } from "react-icons/fa";
+
 import MinutesLeft from "./minutes-left";
+import Skeletton from "../core/skeletton";
 
 interface ArrivingBusesListProps {
     stationId: string;
     busNo: number;
     direction: string;
-}
-
-function Skeletton() {
-    return (
-        <div className="skeletton--isloading">
-            <div className="loading-content">
-                <div className="loading-text-container">
-                    <div className="loading-main-text"></div>
-                    <div className="loading-sub-text"></div>
-                </div>
-                <div className="loading-btn"></div>
-            </div>
-        </div>
-    )
 }
 
 export default async function ArrivingBusesList({ stationId, busNo, direction }: ArrivingBusesListProps) {
