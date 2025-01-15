@@ -1,0 +1,223 @@
+.bus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+
+    &.active {
+        .busNo {
+            color: rgba(22, 101, 52, 1);
+        }
+
+        .stationsLeft {
+            font-weight: 600;
+        }
+    }
+
+    &.target {
+        margin: 16px;
+        padding: 0;
+        flex-direction: column;
+        background: #effdf4;
+        border: 1px solid rgba(22, 101, 52, 0.5);
+        border-radius: 4px;
+
+        .top {
+            padding: 20px 16px;
+        }
+
+        .bottom {
+            padding: 12px 16px;
+            background: #dcf7e6;
+            border-top: 1px solid #c5e9d2;
+            border-radius: 0 0 4px 4px;
+        }
+    }
+}
+
+.busNo {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.stationsLeft {
+    font-size: 16px;
+}
+
+.durationLeft {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+    font-size: 12px;
+    font-weight: 600;
+
+    span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #005103;
+    }
+
+    .durationLeftKm,
+    .durationLeftTime {
+        span {
+            display: inline-block;
+            margin: 0 4px;
+            color: #8bbcb0;
+            transform: translateY(1.2px);
+        }
+    }
+}
+
+.header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 60px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.bikeIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007f5f;
+}
+
+.disabledIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0466c8;
+}
+
+.stationName {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+.noData {
+    padding: 16px;
+    margin: 0 16px;
+    font-size: 14px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+.noDataTarget {
+    padding: 16px;
+    margin: 16px 16px 0 16px;
+    font-size: 14px;
+    background: #ffebeb;
+    border: 1px solid #fe6d68;
+    border-radius: 4px;
+    
+    span {
+        font-weight: 600;
+        color: #ea3832;
+        font-size: 18px;
+    }
+}
+
+.busDirection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 400;
+    font-size: 10px;
+    color: #939393;
+    margin-top: 4px;
+}
+
+.busComings {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.othersTitle {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    margin-left: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #7c7c7c;
+}
+
+.favButton {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s;
+
+    &.active {
+        svg path {
+            fill: #ef233c;
+            stroke-width: 40px;
+            stroke: #ef233c;
+        }
+    }
+
+    svg {
+        width: 30px;
+
+        path {
+            fill: transparent;
+            stroke-width: 40px;
+            stroke: #ef233c;
+        }
+    }
+}
