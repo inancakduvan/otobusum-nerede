@@ -1,11 +1,10 @@
 import styles from "./style.module.scss";
-import data from "../../data/eshot-bus-stations.json";
 
 import { Suspense } from "react";
-import { fetchArrivingBuses, fetchDestinationInfoOfTargetBus } from "@/requests"
-import { ArrivingBus, StationOfTargetBus } from "@/types";
-import { FaBiking, FaBus, FaClock, FaWheelchair } from "react-icons/fa";
-import { convertTimeLeft } from "@/utils";
+import { fetchArrivingBuses } from "@/requests"
+import { ArrivingBus } from "@/types";
+import { FaBiking, FaWheelchair } from "react-icons/fa";
+import MinutesLeft from "./minutes-left";
 
 interface ArrivingBusesListProps {
     stationId: string;
@@ -32,17 +31,6 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
 
     const targetArrivingBus = arrivingBuses.find((item: ArrivingBus) => item.HatNumarasi.toString() === busNo.toString() && (item.KoorX !== "0" || item.KoorY !== "0"));
     const otherArrivingBuses = arrivingBuses.filter((item: ArrivingBus) => item.HattinYonu.toString() == direction && item.HatNumarasi.toString() !== busNo.toString());
-    const station = data.find((item: StationOfTargetBus) => item.DURAK_ID.toString() === stationId);
-
-    const destinationInfoOfTargetBus = (targetArrivingBus && station) ? await fetchDestinationInfoOfTargetBus(targetArrivingBus, station) : undefined;
-
-    let targetArrivingBusInfo = undefined;
-
-    if (destinationInfoOfTargetBus && destinationInfoOfTargetBus.routes && destinationInfoOfTargetBus.routes.length > 0) {
-        if (destinationInfoOfTargetBus.routes[0].legs && destinationInfoOfTargetBus.routes[0].legs.length > 0) {
-            targetArrivingBusInfo = destinationInfoOfTargetBus.routes[0].legs[0];
-        }
-    }
 
     return (
         <Suspense fallback={<Skeletton />}>
@@ -64,14 +52,7 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
                                 </div>
                             </div>
 
-                            {
-                                targetArrivingBusInfo && <div className={styles.bottom}>
-                                    <div className={styles.durationLeft}>
-                                        <span className={styles.durationLeftKm}><span><FaBus /></span> ~ {targetArrivingBusInfo.distance.text}</span>
-                                        <span className={styles.durationLeftTime}><span><FaClock /></span> ~ {convertTimeLeft(targetArrivingBusInfo.distance.value, targetArrivingBusInfo.duration.value)} dakika</span>
-                                    </div>
-                                </div>
-                            }
+                            <MinutesLeft targetArrivingBus={targetArrivingBus} stationId={stationId} />
                         </div>
                         :
                         <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>

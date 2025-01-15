@@ -1,5 +1,6 @@
 import Header from "@/components/arriving-buses/header";
 import ArrivingBusesList from "@/components/arriving-buses/list";
+import BusStationsContextProvider from "@/context/bus-stations";
 
 interface ArrivingBusesPageProps {
     params: Promise<{
@@ -13,9 +14,9 @@ export default async function ArrivingBusesPage({ params }: ArrivingBusesPagePro
     const { stationId, busNo, direction } = await params;
 
     return (
-        <div>
+        <BusStationsContextProvider>
             <Header />
             <ArrivingBusesList stationId={stationId} busNo={busNo} direction={direction} />
-        </div>
+        </BusStationsContextProvider>
     )
 }
