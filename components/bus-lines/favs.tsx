@@ -6,6 +6,8 @@ import { FaArrowRight, FaDotCircle } from "react-icons/fa";
 import { BusLinesFav } from "@/types";
 import { BusDirections } from "@/enums";
 
+import ProgressBar from "../core/progress-bar";
+
 export default function Favs() {
     const { favs } = useBusLinesContext();
 
@@ -16,6 +18,9 @@ export default function Favs() {
     }
     
     return (
+        <>
+        <ProgressBar />
+
         <div className={styles.list}>
             {
                 favs.length > 0 ?
@@ -34,5 +39,6 @@ export default function Favs() {
                 <div className={styles.noData}>{"Favorilerinize eklenmiş bir güzergah bulunmuyor."}</div>
             }
         </div> 
+        </>
     )
 }
