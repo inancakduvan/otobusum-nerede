@@ -8,7 +8,7 @@ export const fetchArrivingBuses = async (stationId: string): Promise<ArrivingBus
 }
 
 export const fetchDestinationInfoOfTargetBus = async (targetBus: ArrivingBus, station: StationOfTargetBus): Promise<GoogleDirectionsResponse> => {
-    const data = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${targetBus.KoorX.split(",").join(".")},${targetBus.KoorY.split(",").join(".")}&destination=${station.ENLEM},${station.BOYLAM}&mode=driving&key=AIzaSyDjtWDYguFO-KBsU5rxdP4imQDi_ulp9Ek`).then((r) =>
+    const data = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${targetBus.KoorX.split(",").join(".")},${targetBus.KoorY.split(",").join(".")}&destination=${station.ENLEM},${station.BOYLAM}&mode=driving&key=${process.env.GOOGLE_TRANSPORTATION_API_KEY}`).then((r) =>
       r.json()
     );
     return data;  
