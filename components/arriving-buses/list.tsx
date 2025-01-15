@@ -62,7 +62,7 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
 
                 {
                     otherArrivingBuses.length > 0 ?
-                        otherArrivingBuses.map((bus: ArrivingBus) => <div key={"other-arriving-buses-" + bus.HatNumarasi} className={styles.bus + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
+                        otherArrivingBuses.map((bus: ArrivingBus, index: number) => <div key={"other-arriving-buses-" + bus.HatNumarasi + index} className={styles.bus + " " + (bus.HatNumarasi == busNo ? styles.active : '')}>
                             <div className={styles.left}>
                                 <div className={styles.busNo}>{bus.HatNumarasi}</div>
 
