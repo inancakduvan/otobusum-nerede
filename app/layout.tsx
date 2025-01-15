@@ -11,6 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Otobüsüm Nerede",
   description: "İzmir otobüslerinin durağınıza kaç durak uzaklıkta olduğunu öğrenebileceğiniz, kullanıcı dostu bir uygulama.",  
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
   authors: [
     { name: "İnanç Akduvan", url: "https://inancakduvan.vercel.app" }
   ]
