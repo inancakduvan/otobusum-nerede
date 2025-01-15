@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import "./globals.scss";
 
@@ -13,9 +13,14 @@ export const metadata: Metadata = {
   description: "İzmir otobüslerinin durağınıza kaç durak uzaklıkta olduğunu öğrenebileceğiniz, kullanıcı dostu bir uygulama.",  
   authors: [
     { name: "İnanç Akduvan", url: "https://inancakduvan.vercel.app" }
-  ],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1"
+  ]
 };
+
+export const viewport: Viewport = {
+  initialScale: 1,
+  maximumScale: 1,
+  width: 'device-width'
+}
 
 export default function RootLayout({
   children,
