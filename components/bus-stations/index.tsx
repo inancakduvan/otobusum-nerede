@@ -7,7 +7,7 @@ import Stations from "./stations";
 export default function BusStations() {
     return (
         <div className="wrapper">
-            <ProgressBar />
+            <ProgressBar top="85px" />
             <Header />
             <Stations />
         </div>

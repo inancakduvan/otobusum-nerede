@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import styles from "./style.module.scss";
 
-export default function ProgressBar() {
+export default function ProgressBar({ top = "0"} : { top?: string }) {
   const router = useRouter();
 
   const [progress, setProgress] = useState(0);
@@ -50,6 +50,6 @@ export default function ProgressBar() {
   if (!loading) return null;
 
   return (
-    <div className={styles.progressBar} style={{ width: `${progress}%` }}></div>
+    <div className={styles.progressBar} style={{ width: `${progress}%`, top }}></div>
   );
 };

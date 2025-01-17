@@ -3,8 +3,9 @@
     top: 0;
     left: 0;
     width: 0;
-    height: 2px;
-    background: #0d3160;
+    height: 4px;
+    background: #D3CCE3;
+    background: linear-gradient(to right, #E9E4F0, #D3CCE3);
     z-index: 9999;
     transition: width 0.2s ease;
 }

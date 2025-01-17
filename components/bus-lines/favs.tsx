@@ -19,7 +19,7 @@ export default function Favs() {
     
     return (
         <>
-        <ProgressBar />
+        <ProgressBar top="56px" />
 
         <div className={styles.list}>
             {
