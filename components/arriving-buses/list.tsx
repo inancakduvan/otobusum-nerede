@@ -8,6 +8,7 @@ import { FaBiking, FaWheelchair } from "react-icons/fa";
 
 import MinutesLeft from "./minutes-left";
 import Skeletton from "../core/skeletton";
+import RefreshButton from "./refresh-button";
 
 interface ArrivingBusesListProps {
     stationId: string;
@@ -23,7 +24,7 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
 
     return (
         <Suspense fallback={<Skeletton />}>
-            <>
+            <div className={styles.listPageWrapper}>
                 {
                     targetArrivingBus ?
                         <div key={"target-arriving-bus-" + targetArrivingBus.HatNumarasi} className={styles.bus + " " + styles.target + " " + (targetArrivingBus.HatNumarasi == busNo ? styles.active : '')}>
@@ -67,7 +68,9 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
                         :
                         <div className={styles.noData}>Yaklaşan başka otobüs bulunmamaktadır.</div>
                 }
-            </>
+
+                <RefreshButton />
+            </div>
         </Suspense>
     )
 }
