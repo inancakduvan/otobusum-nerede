@@ -13,7 +13,11 @@ export const metadata: Metadata = {
   description: "İzmir otobüslerinin durağınıza kaç durak uzaklıkta olduğunu öğrenebileceğiniz, kullanıcı dostu bir uygulama.",  
   authors: [
     { name: "İnanç Akduvan", url: "https://inancakduvan.vercel.app" }
-  ]
+  ],
+  manifest: "/manifest.json",
+  icons: {
+    apple: "/icon.png"
+  }
 };
 
 export const viewport: Viewport = {
