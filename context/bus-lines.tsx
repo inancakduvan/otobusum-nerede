@@ -10,6 +10,8 @@ interface Context {
   setFavs: (favs: BusLinesFavs) => void;
   valueToFilter: string;
   setValueToFilter: (valueToFilter: string) => void;
+  isShowIosModal: boolean;
+  setIsShowIosModal: (show: boolean) => void;
 }
 
 interface Props {
@@ -23,6 +25,8 @@ const initialState: Context = {
   setFavs: () => {},
   valueToFilter: "",
   setValueToFilter: () => {},
+  isShowIosModal: false,
+  setIsShowIosModal: () => false
 };
 
 export const BusLinesContext = createContext<Context>(initialState);
@@ -32,10 +36,11 @@ export default function BusLinesContextProvider({ children }: Props) {
   const [isShowFavs, setIsShowFavs] = useState(initialState.isShowFavs);
   const [favs, setFavs] = useState(initialState.favs);
   const [valueToFilter, setValueToFilter] = useState(initialState.valueToFilter);
+  const [isShowIosModal, setIsShowIosModal] = useState(initialState.isShowIosModal);
 
   return (
     <BusLinesContext.Provider
-      value={{ isShowFavs, setIsShowFavs, favs, setFavs, valueToFilter, setValueToFilter }}
+      value={{ isShowFavs, setIsShowFavs, favs, setFavs, valueToFilter, setValueToFilter, isShowIosModal, setIsShowIosModal }}
     >
       {children}
     </BusLinesContext.Provider>
