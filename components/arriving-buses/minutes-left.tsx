@@ -8,10 +8,11 @@ import { fetchDestinationInfoOfTargetBus } from "@/requests";
 
 interface MinutesLeftProps {
     targetArrivingBus: ArrivingBus,
-    stationId: string
+    stationId: string,
+    moving: boolean
 }
 
-export default async function MinutesLeft({ targetArrivingBus, stationId } : MinutesLeftProps) {
+export default async function MinutesLeft({ targetArrivingBus, stationId, moving } : MinutesLeftProps) {
     if (!targetArrivingBus || !stationId) {
         return null;
     }
@@ -35,7 +36,14 @@ export default async function MinutesLeft({ targetArrivingBus, stationId } : Min
         <div className={styles.bottom}>
             <div className={styles.durationLeft}>
                 <span className={styles.durationLeftKm}><span><FaBus /></span> ~ {targetArrivingBusInfo.distance.text}</span>
-                <span className={styles.durationLeftTime}><span><FaClock /></span> ~ {convertTimeLeft(targetArrivingBusInfo.distance.value, targetArrivingBusInfo.duration.value)} dakika</span>
+                <span className={styles.durationLeftTime}><span><FaClock /></span> 
+                    {
+                        moving ?
+                        <>~ {convertTimeLeft(targetArrivingBusInfo.distance.value, targetArrivingBusInfo.duration.value)} dakika</>
+                        :
+                        'Henüz kalkmadı'
+                    }
+                </span>
             </div>
         </div>
     )

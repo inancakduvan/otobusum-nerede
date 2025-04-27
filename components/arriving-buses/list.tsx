@@ -51,7 +51,7 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
                                 </div>
                             </div>
 
-                            <MinutesLeft targetArrivingBus={targetArrivingBus} stationId={stationId} />
+                            <MinutesLeft targetArrivingBus={targetArrivingBus} stationId={stationId} moving={!(index - 1 == targetArrivingBus.KalanDurakSayisi)} />
                         </div>
 
                        {

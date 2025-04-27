@@ -57,7 +57,7 @@ export default function BusLines() {
                     </div>
 
                     <ul>
-                        <li>Alt bardaki Paylaş (Share) butonuna (yukarı ok işareti olan kutu) dokunun.</li>
+                        <li>Alt bardaki Paylaş (Share) butonuna (<img src="/iphone-share-icon.png" style={{ display: 'inline', width: '16px', transform: 'translateY(2px)'}} />) dokunun.</li>
 
                         <li> Açılan menüde aşağı kaydırıp "Ana Ekrana Ekle" seçeneğini bulun ve seçin.</li>
 
