@@ -15,16 +15,16 @@ function isInStandaloneMode() {
 
 export default function InstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-  const [showButton, setShowButton] = useState(true);
+  const [showButton, setShowButton] = useState(false);
 
    const { isShowIosModal, setIsShowIosModal } = useBusLinesContext();
-
 
   useEffect(() => {
     const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
       setShowButton(true);
+      console.log(e)
     };
 
     window.addEventListener("beforeinstallprompt", handler);
@@ -36,20 +36,23 @@ export default function InstallButton() {
     if (isIos() && !isInStandaloneMode()) {
         setIsShowIosModal(true);
     } else {
+        console.log(deferredPrompt)
         if (!deferredPrompt) return;
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-        if (outcome === "accepted") {
-            console.log("Kullanıcı uygulamayı yükledi");
-        } else {
-            console.log("Kullanıcı yüklemeyi reddetti");
-        }
+           
+            if (outcome === "accepted") {
+                console.log("Kullanıcı uygulamayı yükledi");
+            } else {
+                console.log("Kullanıcı yüklemeyi reddetti");
+           
+            }
             setDeferredPrompt(null);
             setShowButton(false);
         }
   };
 
-  if (showButton || isShowIosModal) {
+  if ((showButton || isShowIosModal) && !isInStandaloneMode()) {
     return (
     <>
       <button onClick={handleInstallClick} className={styles.installButton}>
