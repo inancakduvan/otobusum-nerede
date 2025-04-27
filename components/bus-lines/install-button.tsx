@@ -17,7 +17,7 @@ export default function InstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
   const [showButton, setShowButton] = useState(false);
 
-   const { isShowIosModal, setIsShowIosModal } = useBusLinesContext();
+   const { setIsShowIosModal } = useBusLinesContext();
 
   useEffect(() => {
     const handler = (e: any) => {
