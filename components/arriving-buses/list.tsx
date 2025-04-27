@@ -3,12 +3,15 @@ import styles from "./style.module.scss";
 import { Suspense } from "react";
 
 import { fetchArrivingBuses } from "@/requests"
-import { ArrivingBus } from "@/types";
+import { ArrivingBus, BusStations } from "@/types";
 import { FaBiking, FaWheelchair } from "react-icons/fa";
 
 import MinutesLeft from "./minutes-left";
 import Skeletton from "../core/skeletton";
 import RefreshButton from "./refresh-button";
+
+import dataBusStationsToDirection1 from "../../data/eshot-bus-stations-to-direction-1.json";
+import dataBusStationsToDirection2 from "../../data/eshot-bus-stations-to-direction-2.json";
 
 interface ArrivingBusesListProps {
     stationId: string;
@@ -22,11 +25,17 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
     const targetArrivingBus = arrivingBuses.find((item: ArrivingBus) => item.HatNumarasi.toString() === busNo.toString() && (item.KoorX !== "0" || item.KoorY !== "0"));
     const otherArrivingBuses = arrivingBuses.filter((item: ArrivingBus) => item.HattinYonu.toString() == direction && item.HatNumarasi.toString() !== busNo.toString());
 
+    const targetStations = direction == '1' ? dataBusStationsToDirection1 : dataBusStationsToDirection2;
+    const stationsToDirection = targetStations as { [key: string]: BusStations };
+    const stations = stationsToDirection[busNo];
+    const index = stations.findIndex((item) => item.DurakId.toString() === stationId);
+
     return (
         <Suspense fallback={<Skeletton />}>
             <div className={styles.listPageWrapper}>
                 {
                     targetArrivingBus ?
+                        <>
                         <div key={"target-arriving-bus-" + targetArrivingBus.HatNumarasi} className={styles.bus + " " + styles.target + " " + (targetArrivingBus.HatNumarasi == busNo ? styles.active : '')}>
                             <div className={styles.top}>
                                 <div className={styles.left}>
@@ -44,6 +53,12 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
 
                             <MinutesLeft targetArrivingBus={targetArrivingBus} stationId={stationId} />
                         </div>
+
+                       {
+                        index - 1 == targetArrivingBus.KalanDurakSayisi &&
+                        <div className={styles.firstStationWarning}>* Otobüs henüz kalkış durağında bekliyor.</div>
+                       } 
+                        </>
                         :
                         <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>
                 }
