@@ -24,8 +24,11 @@ export default function InstallButton() {
       e.preventDefault();
       setDeferredPrompt(e);
       setShowButton(true);
-      console.log(e)
     };
+    
+    if (isIos() && !isInStandaloneMode()) {
+        setShowButton(true);
+    }
 
     window.addEventListener("beforeinstallprompt", handler);
 
@@ -52,7 +55,7 @@ export default function InstallButton() {
         }
   };
 
-  if ((showButton || isShowIosModal) && !isInStandaloneMode()) {
+  if (showButton && !isInStandaloneMode()) {
     return (
     <>
       <button onClick={handleInstallClick} className={styles.installButton}>
