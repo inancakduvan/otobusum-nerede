@@ -38,6 +38,15 @@
             border-radius: 0 0 4px 4px;
         }
     }
+
+    &.departureStation {
+        background: #fffae5;
+        border: 1px solid #ffd400;
+        
+        .busNo {
+            color: #76520e;
+        }
+    }
 }
 
 .busNo {
@@ -47,6 +56,10 @@
 
 .stationsLeft {
     font-size: 16px;
+
+    &.stationsLeftSmall {
+        font-size: 13px;
+    }
 }
 
 .durationLeft {

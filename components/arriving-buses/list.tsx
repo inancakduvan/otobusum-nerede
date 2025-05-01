@@ -34,6 +34,7 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
         <Suspense fallback={<Skeletton />}>
             <div className={styles.listPageWrapper}>
                 {
+                    index !== 0 ?
                     targetArrivingBus ?
                         <>
                         <div key={"target-arriving-bus-" + targetArrivingBus.HatNumarasi} className={styles.bus + " " + styles.target + " " + (targetArrivingBus.HatNumarasi == busNo ? styles.active : '')}>
@@ -61,6 +62,18 @@ export default async function ArrivingBusesList({ stationId, busNo, direction }:
                         </>
                         :
                         <div className={styles.noDataTarget}>Yaklaşan <span>{busNo}</span> numaralı otobüs bulunmamaktadır.</div>
+                    :
+                    <div key={"target-arriving-bus-" + busNo} className={styles.bus + " " + styles.departureStation + " " + styles.target + " " + styles.active}>
+                        <div className={styles.top}>
+                            <div className={styles.left}>
+                                <div className={styles.busNo}>{busNo}</div>
+                            </div>
+
+                            <div className={styles.right}>
+                                <div className={styles.stationsLeft + " " + styles.stationsLeftSmall}>Şu anda kalkış durağındasınız.</div>
+                            </div>
+                        </div>
+                    </div>
                 }
 
                 <div className={styles.othersTitle}>YAKLAŞAN DİĞER OTOBÜSLER</div>
