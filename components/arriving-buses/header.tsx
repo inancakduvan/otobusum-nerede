@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useBusStationsContext } from "@/context/bus-stations";
 import { FaArrowLeft, FaArrowRight, FaHeart } from "react-icons/fa";
 import { BusLinesFav } from "@/types";
-import { StorageKeys } from "@/enums";
+import { BusDirections, StorageKeys } from "@/enums";
 
 export default function Header() {
     const [isFav, setIsFav] = useState(false);
@@ -85,7 +85,8 @@ export default function Header() {
             <span className={styles.backButton} onClick={() => router.push("/hat/" + busNo)}><FaArrowLeft /></span>
             <span className={styles.stationName}>{getDecodedStationName()} Durağı</span>
             { (busDirectionStart && busDirectionEnd) && <div className={styles.busDirection}>
-                {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
+                {direction === BusDirections.Gidiş ? busDirectionStart : busDirectionEnd} <span><FaArrowRight size={8} /></span> 
+                {direction === BusDirections.Gidiş ? busDirectionEnd : busDirectionStart}
             </div>}
 
             <span className={styles.favButton + " " + (isFav ? styles.active : "")} onClick={addLineToFavs}><FaHeart /></span>
