@@ -92,6 +92,10 @@
     box-shadow: 5px 10px 10px -10px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     white-space: pre;
+
+    &.active {
+        background: #195ef2;
+    }
 }
 
 .noData {
