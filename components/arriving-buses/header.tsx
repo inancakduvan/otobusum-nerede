@@ -29,7 +29,9 @@ export default function Header() {
             busNo,
             stationName: getDecodedStationName(),
             direction,
-            stationId
+            stationId,
+            busDirectionStart,
+            busDirectionEnd,
         }
     }
 

@@ -15,6 +15,8 @@ export interface BusLinesFav {
     busNo: string,
     stationName: string,
     direction: BusDirections.Gidiş | BusDirections.Dönüş,
+    busDirectionStart: string,
+    busDirectionEnd: string
 }
 
 export interface BusStation {
