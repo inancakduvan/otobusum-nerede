@@ -28,7 +28,8 @@ export default function Favs() {
                     <div className={styles.busName + " " + styles.favItemWrapper}>
                         <div className={styles.favItemName}>
                             <span>{item.busNo}</span> <span className={styles.favItemIcon}><FaDotCircle size={4} /><FaDotCircle size={4} /><FaDotCircle size={4} /></span>
-                            {item.stationName} <span className={styles.favItemIcon}><FaDotCircle size={4} /><FaDotCircle size={4} /><FaDotCircle size={4} /></span>
+                            <div className={styles.favItemNameInner}>
+                            {item.stationName}
                             {item.busDirectionStart ? 
                                 (item.direction === BusDirections.Gidiş ? 
                                     <span className={styles.favItemNameDirection}>
@@ -39,8 +40,9 @@ export default function Favs() {
                                         {item.busDirectionEnd}{<FaArrowRight size={8} />}{item.busDirectionStart}
                                     </span>
                                 ) 
-                                : 
-                                (item.direction === BusDirections.Gidiş ? "Gidiş" : "Dönüş")}
+                                : <span className={styles.favItemNameDirection}>{(item.direction === BusDirections.Gidiş ? "Gidiş" : "Dönüş")}</span>
+                                }
+                            </div>
                         </div>
 
                         <div className={styles.favItemRight}><FaArrowRight size={20} /></div>
