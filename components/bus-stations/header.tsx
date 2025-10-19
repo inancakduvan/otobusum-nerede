@@ -41,7 +41,7 @@ export default function Header() {
             <span className={styles.backButton} onClick={() => router.push("/")}><FaArrowLeft /></span>
             DURAK SEÇİNİZ
             { (busDirectionStart && busDirectionEnd) && <div className={styles.busDirection}>
-                {busDirectionStart} <span><FaArrowRight size={8} /></span> {busDirectionEnd}
+                {busDirectionStart} <span className={styles.arrow + ' ' + (showStationsToDirection1 ? '' : styles.rotated)}><FaArrowRight size={8} /></span> {busDirectionEnd}
             </div>}
         </div>
 

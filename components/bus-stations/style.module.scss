@@ -111,3 +111,15 @@
     color: #939393;
     margin-top: 4px;
 }
+
+.arrow {
+    &.rotated {
+        svg {
+            transform: rotate(180deg);
+        }
+    }
+
+    svg {
+        transition: 0.25s;
+    }
+}
